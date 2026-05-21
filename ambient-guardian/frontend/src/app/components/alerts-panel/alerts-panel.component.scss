@@ -1,0 +1,126 @@
+:host {
+  display: block;
+}
+
+.alerts-panel {
+  min-height: 360px;
+}
+
+.empty-state {
+  display: grid;
+  place-items: center;
+  min-height: 210px;
+  border: 1px dashed rgba(148, 163, 184, 0.2);
+  border-radius: 8px;
+  color: var(--muted);
+  text-align: center;
+}
+
+.empty-state strong {
+  color: var(--text);
+}
+
+.empty-state span {
+  margin-top: -70px;
+}
+
+.alert-row {
+  display: grid;
+  grid-template-columns: 92px minmax(0, 1fr) 32px;
+  gap: 14px;
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.56);
+  color: var(--text);
+  text-align: left;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease;
+}
+
+.alert-row:hover {
+  transform: translateX(2px);
+  border-color: rgba(125, 211, 252, 0.34);
+}
+
+.severity-critical {
+  border-color: rgba(255, 77, 109, 0.54);
+  animation: blink-critical 1.2s ease-in-out infinite;
+}
+
+.severity-warning {
+  border-color: rgba(255, 184, 77, 0.44);
+}
+
+.badge {
+  align-self: start;
+  padding: 7px 9px;
+  border-radius: 999px;
+  background: rgba(148, 163, 184, 0.12);
+  color: var(--muted-strong);
+  font-size: 0.66rem;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+}
+
+.severity-critical .badge {
+  background: rgba(255, 77, 109, 0.14);
+  color: var(--critical);
+}
+
+.severity-warning .badge {
+  background: rgba(255, 184, 77, 0.14);
+  color: var(--warning);
+}
+
+.alert-row__main {
+  display: grid;
+  min-width: 0;
+  gap: 4px;
+}
+
+.alert-row__main strong {
+  font-size: 0.98rem;
+}
+
+.alert-row__main small,
+.alert-row__main em {
+  color: var(--muted);
+  font-style: normal;
+  line-height: 1.45;
+}
+
+.chevron {
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.1);
+  color: var(--accent);
+  font-size: 1.1rem;
+}
+
+@keyframes blink-critical {
+  0%,
+  100% {
+    box-shadow: 0 0 16px rgba(255, 77, 109, 0.12);
+  }
+
+  50% {
+    box-shadow: 0 0 34px rgba(255, 77, 109, 0.28);
+  }
+}
+
+@media (max-width: 560px) {
+  .alert-row {
+    grid-template-columns: 1fr 28px;
+  }
+
+  .badge {
+    grid-column: 1 / -1;
+    width: fit-content;
+  }
+}

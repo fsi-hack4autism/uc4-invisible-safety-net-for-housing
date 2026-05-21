@@ -1,0 +1,21 @@
+<article class="panel floor-panel" [ngClass]="'severity-' + status.toLowerCase()">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Live Floor Map</p>
+      <h2>{{ activeRoom }}</h2>
+    </div>
+    <span class="chip">Motion Fusion</span>
+  </div>
+
+  <div class="floor-grid">
+    <section
+      *ngFor="let room of rooms"
+      class="room"
+      [ngClass]="[room.className, activeSensors[room.id] ? 'room--active' : '']"
+    >
+      <div class="room__sensor"></div>
+      <strong>{{ room.label }}</strong>
+      <span>{{ activeSensors[room.id] ? 'Occupied / motion' : 'Quiet' }}</span>
+    </section>
+  </div>
+</article>

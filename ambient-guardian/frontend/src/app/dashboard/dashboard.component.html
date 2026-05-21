@@ -1,0 +1,68 @@
+<main class="dashboard-shell" [ngClass]="'mode-' + state().status.toLowerCase()">
+  <header class="topbar">
+    <div class="brand">
+      <span class="brand__mark"></span>
+      <div>
+        <p>Ambient Safety Operations</p>
+        <h1>AI Ambient Guardian</h1>
+      </div>
+    </div>
+
+    <div class="ops-strip">
+      <span class="connection" [ngClass]="'connection--' + state().connectionStatus.toLowerCase()">
+        {{ state().connectionStatus }}
+      </span>
+      <span class="system-mode">{{ state().status }}</span>
+      <time>{{ state().timestamp }}</time>
+    </div>
+  </header>
+
+  <section *ngIf="state().loading" class="loading-panel">
+    <span></span>
+    Connecting to backend simulation stream
+  </section>
+
+  <section *ngIf="state().error" class="error-banner">
+    {{ state().error }}
+  </section>
+
+  <section class="status-grid">
+    <app-status-card *ngFor="let card of statusCards()" [card]="card" />
+  </section>
+
+  <section class="primary-grid">
+    <app-floor-map
+      [activeSensors]="state().activeSensors"
+      [activeRoom]="state().activeRoom"
+      [status]="state().status"
+    />
+
+    <app-ai-insights
+      [insight]="state().aiInsight"
+      [anomaly]="state().anomaly"
+      [interpretation]="state().interpretation"
+      [recommendation]="state().recommendation"
+      [confidence]="state().aiConfidence"
+      [status]="state().status"
+    />
+
+    <app-risk-gauge
+      [riskScore]="state().riskScore"
+      [status]="state().status"
+    />
+  </section>
+
+  <section class="secondary-grid">
+    <app-alerts-panel
+      [alerts]="state().alerts"
+      (toggleAlert)="toggleAlert($event)"
+    />
+
+    <app-sensor-timeline
+      [entries]="state().timeline"
+      [readings]="state().sensorReadings"
+    />
+  </section>
+
+  <app-scenario-controls (runScenario)="runScenario($event)" />
+</main>

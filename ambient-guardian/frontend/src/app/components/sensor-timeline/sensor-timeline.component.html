@@ -1,0 +1,24 @@
+<article class="panel timeline-panel">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Live Sensor Timeline</p>
+      <h2>Event Stream</h2>
+    </div>
+    <span class="chip">Auto-scroll</span>
+  </div>
+
+  <div class="reading-grid">
+    <div *ngFor="let reading of readings" class="reading">
+      <span>{{ reading.label }}</span>
+      <strong>{{ reading.value }}</strong>
+    </div>
+  </div>
+
+  <div #stream class="stream">
+    <div *ngFor="let entry of entries" class="stream-row" [ngClass]="'severity-' + entry.severity.toLowerCase()">
+      <span class="dot"></span>
+      <time>[{{ entry.timestamp }}]</time>
+      <p>{{ entry.message }}</p>
+    </div>
+  </div>
+</article>

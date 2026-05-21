@@ -1,0 +1,164 @@
+:host {
+  display: block;
+}
+
+.floor-panel {
+  min-height: 420px;
+}
+
+.floor-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr 0.86fr;
+  grid-template-rows: 132px 128px 112px;
+  gap: 10px;
+  min-height: 350px;
+  padding: 14px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  background:
+    linear-gradient(rgba(125, 211, 252, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(125, 211, 252, 0.06) 1px, transparent 1px),
+    rgba(3, 7, 18, 0.42);
+  background-size: 34px 34px;
+}
+
+.room {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
+  padding: 16px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.62);
+  transition: border-color 180ms ease, background 180ms ease, box-shadow 180ms ease, transform 180ms ease;
+}
+
+.room::after {
+  content: "";
+  position: absolute;
+  inset: 8px;
+  border: 1px dashed rgba(148, 163, 184, 0.12);
+  border-radius: 6px;
+  pointer-events: none;
+}
+
+.room__sensor {
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--muted);
+  box-shadow: 0 0 0 6px rgba(148, 163, 184, 0.08);
+}
+
+.room strong {
+  position: relative;
+  z-index: 1;
+  color: var(--text);
+  font-size: 1.02rem;
+}
+
+.room span {
+  position: relative;
+  z-index: 1;
+  color: var(--muted);
+  font-size: 0.78rem;
+}
+
+.room--active {
+  transform: translateY(-2px);
+  border-color: rgba(47, 255, 168, 0.5);
+  background: radial-gradient(circle at 22% 16%, rgba(47, 255, 168, 0.24), transparent 38%), rgba(15, 23, 42, 0.78);
+  box-shadow: 0 0 28px rgba(47, 255, 168, 0.16);
+}
+
+.severity-warning .room--active {
+  border-color: rgba(255, 184, 77, 0.62);
+  background: radial-gradient(circle at 22% 16%, rgba(255, 184, 77, 0.28), transparent 38%), rgba(15, 23, 42, 0.78);
+  box-shadow: 0 0 30px rgba(255, 184, 77, 0.18);
+}
+
+.severity-critical .room--active {
+  border-color: rgba(255, 77, 109, 0.72);
+  background: radial-gradient(circle at 22% 16%, rgba(255, 77, 109, 0.32), transparent 38%), rgba(15, 23, 42, 0.78);
+  box-shadow: 0 0 36px rgba(255, 77, 109, 0.24);
+  animation: urgent-room 1s ease-in-out infinite;
+}
+
+.room--active .room__sensor {
+  background: var(--safe);
+  animation: sensor-pulse 1.25s ease-in-out infinite;
+}
+
+.severity-warning .room--active .room__sensor {
+  background: var(--warning);
+}
+
+.severity-critical .room--active .room__sensor {
+  background: var(--critical);
+}
+
+.bedroom {
+  grid-column: 1;
+  grid-row: 1 / span 2;
+}
+
+.kitchen {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.bathroom {
+  grid-column: 3;
+  grid-row: 1;
+}
+
+.living-room {
+  grid-column: 2 / span 2;
+  grid-row: 2;
+}
+
+.exit-door {
+  grid-column: 1 / -1;
+  grid-row: 3;
+}
+
+@keyframes sensor-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0 6px rgba(47, 255, 168, 0.09), 0 0 16px currentColor;
+  }
+
+  50% {
+    box-shadow: 0 0 0 12px rgba(47, 255, 168, 0.03), 0 0 28px currentColor;
+  }
+}
+
+@keyframes urgent-room {
+  0%,
+  100% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0.76;
+  }
+}
+
+@media (max-width: 720px) {
+  .floor-grid {
+    grid-template-columns: 1fr;
+    grid-template-rows: none;
+  }
+
+  .bedroom,
+  .kitchen,
+  .bathroom,
+  .living-room,
+  .exit-door {
+    grid-column: auto;
+    grid-row: auto;
+    min-height: 112px;
+  }
+}

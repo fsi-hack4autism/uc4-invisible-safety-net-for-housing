@@ -1,0 +1,6 @@
+<article class="status-card" [ngClass]="'severity-' + card.severity.toLowerCase()">
+  <div class="status-card__shine"></div>
+  <p>{{ card.label }}</p>
+  <strong>{{ card.value }}</strong>
+  <span>{{ card.meta }}</span>
+</article>

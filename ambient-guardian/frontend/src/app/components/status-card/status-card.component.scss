@@ -1,0 +1,106 @@
+:host {
+  display: block;
+  min-width: 0;
+}
+
+.status-card {
+  position: relative;
+  overflow: hidden;
+  min-height: 138px;
+  padding: 18px;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  background: linear-gradient(145deg, rgba(15, 23, 42, 0.84), rgba(2, 8, 23, 0.74));
+  box-shadow: var(--shadow-soft);
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  animation: card-arrive 420ms ease both;
+}
+
+.status-card:hover {
+  transform: translateY(-2px);
+}
+
+.status-card__shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(120deg, transparent 0%, rgba(255, 255, 255, 0.1) 35%, transparent 58%);
+  transform: translateX(-110%);
+  animation: scan 4.8s ease-in-out infinite;
+}
+
+p,
+span {
+  position: relative;
+  margin: 0;
+  color: var(--muted);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+strong {
+  position: relative;
+  display: block;
+  margin: 18px 0 10px;
+  color: var(--text);
+  font-size: clamp(1.5rem, 2.2vw, 2.35rem);
+  font-weight: 720;
+  line-height: 1;
+}
+
+span {
+  display: block;
+  color: var(--muted-strong);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.severity-normal {
+  border-color: rgba(47, 255, 168, 0.28);
+  box-shadow: 0 0 28px rgba(47, 255, 168, 0.08), var(--shadow-soft);
+}
+
+.severity-warning {
+  border-color: rgba(255, 184, 77, 0.46);
+  box-shadow: 0 0 34px rgba(255, 184, 77, 0.13), var(--shadow-soft);
+}
+
+.severity-critical {
+  border-color: rgba(255, 77, 109, 0.58);
+  box-shadow: 0 0 42px rgba(255, 77, 109, 0.18), var(--shadow-soft);
+  animation: card-arrive 420ms ease both, critical-breathe 1.5s ease-in-out infinite;
+}
+
+@keyframes scan {
+  0%,
+  54% {
+    transform: translateX(-110%);
+  }
+
+  100% {
+    transform: translateX(110%);
+  }
+}
+
+@keyframes card-arrive {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes critical-breathe {
+  0%,
+  100% {
+    box-shadow: 0 0 26px rgba(255, 77, 109, 0.14), var(--shadow-soft);
+  }
+
+  50% {
+    box-shadow: 0 0 48px rgba(255, 77, 109, 0.28), var(--shadow-soft);
+  }
+}

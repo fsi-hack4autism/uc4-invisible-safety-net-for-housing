@@ -1,0 +1,71 @@
+:host {
+  display: block;
+}
+
+.scenario-panel {
+  min-height: 200px;
+}
+
+.control-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 10px;
+}
+
+button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 74px;
+  padding: 12px;
+  border: 1px solid rgba(125, 211, 252, 0.18);
+  border-radius: 8px;
+  background: rgba(15, 23, 42, 0.7);
+  color: var(--text);
+  font: inherit;
+  font-weight: 750;
+  cursor: pointer;
+  transition: transform 180ms ease, border-color 180ms ease, background 180ms ease, box-shadow 180ms ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  border-color: rgba(125, 211, 252, 0.44);
+  background: rgba(30, 41, 59, 0.74);
+}
+
+button span {
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: var(--safe);
+  box-shadow: 0 0 14px var(--safe);
+}
+
+.tone-warning span {
+  background: var(--warning);
+  box-shadow: 0 0 14px var(--warning);
+}
+
+.tone-critical span {
+  background: var(--critical);
+  box-shadow: 0 0 14px var(--critical);
+}
+
+.tone-critical:hover {
+  border-color: rgba(255, 77, 109, 0.54);
+  box-shadow: 0 0 28px rgba(255, 77, 109, 0.12);
+}
+
+@media (max-width: 900px) {
+  .control-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 520px) {
+  .control-grid {
+    grid-template-columns: 1fr;
+  }
+}

@@ -1,0 +1,30 @@
+<article class="panel alerts-panel">
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">Active Alerts</p>
+      <h2>Emergency Queue</h2>
+    </div>
+    <span class="chip">{{ alerts.length }} Open</span>
+  </div>
+
+  <div *ngIf="!alerts.length" class="empty-state">
+    <strong>No active alerts</strong>
+    <span>Resident safety state is stable.</span>
+  </div>
+
+  <button
+    *ngFor="let alert of alerts"
+    type="button"
+    class="alert-row"
+    [ngClass]="['severity-' + alert.severity.toLowerCase(), alert.expanded ? 'alert-row--expanded' : '']"
+    (click)="toggleAlert.emit(alert.id)"
+  >
+    <span class="badge">{{ alert.severity }}</span>
+    <span class="alert-row__main">
+      <strong>{{ alert.title }}</strong>
+      <small>{{ alert.timestamp }}</small>
+      <em *ngIf="alert.expanded">{{ alert.details }}</em>
+    </span>
+    <span class="chevron">{{ alert.expanded ? '−' : '+' }}</span>
+  </button>
+</article>

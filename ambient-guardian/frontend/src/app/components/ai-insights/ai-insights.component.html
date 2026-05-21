@@ -1,0 +1,34 @@
+<article class="panel ai-panel" [ngClass]="'severity-' + status.toLowerCase()">
+  <div class="ai-orb" aria-hidden="true">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+
+  <div class="panel__header">
+    <div>
+      <p class="eyebrow">AI Insight Engine</p>
+      <h2>Guardian Reasoning</h2>
+    </div>
+    <span class="chip">{{ confidence }}% Confidence</span>
+  </div>
+
+  <div class="insight-copy">
+    <p>{{ typedInsight() }}<span class="cursor"></span></p>
+  </div>
+
+  <div class="reason-grid">
+    <section>
+      <span>Detected Anomaly</span>
+      <strong>{{ anomaly }}</strong>
+    </section>
+    <section>
+      <span>Risk Interpretation</span>
+      <strong>{{ interpretation }}</strong>
+    </section>
+    <section>
+      <span>Recommended Action</span>
+      <strong>{{ recommendation }}</strong>
+    </section>
+  </div>
+</article>

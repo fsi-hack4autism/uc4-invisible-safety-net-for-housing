@@ -1,0 +1,235 @@
+:host {
+  display: block;
+}
+
+.dashboard-shell {
+  min-height: 100vh;
+  padding: 24px;
+}
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 18px;
+  padding: 18px 20px;
+  border: 1px solid var(--stroke);
+  border-radius: 8px;
+  background: linear-gradient(135deg, rgba(15, 23, 42, 0.86), rgba(2, 8, 23, 0.68));
+  box-shadow: var(--shadow-soft);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.brand__mark {
+  width: 44px;
+  height: 44px;
+  flex: 0 0 auto;
+  border: 1px solid rgba(47, 255, 168, 0.4);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(47, 255, 168, 0.28), transparent),
+    radial-gradient(circle at 65% 35%, rgba(34, 211, 238, 0.8), transparent 28%);
+  box-shadow: 0 0 30px rgba(47, 255, 168, 0.2);
+}
+
+.brand p {
+  margin: 0 0 4px;
+  color: var(--accent);
+  font-size: 0.72rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+}
+
+h1 {
+  margin: 0;
+  color: var(--text);
+  font-size: clamp(1.48rem, 2.6vw, 2.45rem);
+  line-height: 1;
+}
+
+.ops-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+.ops-strip span,
+.ops-strip time {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 8px 12px;
+  border: 1px solid rgba(148, 163, 184, 0.16);
+  border-radius: 999px;
+  color: var(--muted-strong);
+  background: rgba(15, 23, 42, 0.56);
+  font-family: var(--mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.connection::before {
+  content: "";
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 999px;
+  background: var(--muted);
+}
+
+.connection--live::before {
+  background: var(--safe);
+  box-shadow: 0 0 14px var(--safe);
+}
+
+.connection--connecting::before,
+.connection--reconnecting::before {
+  background: var(--warning);
+  box-shadow: 0 0 14px var(--warning);
+}
+
+.connection--offline::before,
+.connection--error::before,
+.mode-critical .system-mode {
+  color: var(--critical);
+}
+
+.mode-warning .system-mode {
+  color: var(--warning);
+}
+
+.mode-normal .system-mode {
+  color: var(--safe);
+}
+
+.loading-panel,
+.error-banner {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 14px;
+  padding: 14px 16px;
+  border: 1px solid rgba(255, 184, 77, 0.32);
+  border-radius: 8px;
+  color: var(--warning);
+  background: rgba(255, 184, 77, 0.08);
+}
+
+.loading-panel span {
+  width: 12px;
+  height: 12px;
+  border: 2px solid rgba(255, 184, 77, 0.25);
+  border-top-color: var(--warning);
+  border-radius: 999px;
+  animation: spin 900ms linear infinite;
+}
+
+.error-banner {
+  border-color: rgba(255, 77, 109, 0.28);
+  color: var(--critical);
+  background: rgba(255, 77, 109, 0.08);
+}
+
+.status-grid {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.primary-grid,
+.secondary-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+app-floor-map,
+app-ai-insights,
+app-risk-gauge,
+app-alerts-panel,
+app-sensor-timeline,
+app-scenario-controls {
+  display: block;
+  min-width: 0;
+}
+
+app-floor-map {
+  grid-column: span 4;
+}
+
+app-ai-insights {
+  grid-column: span 5;
+}
+
+app-risk-gauge {
+  grid-column: span 3;
+}
+
+app-alerts-panel,
+app-sensor-timeline {
+  grid-column: span 6;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 1280px) {
+  .status-grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+
+  app-floor-map,
+  app-ai-insights {
+    grid-column: span 6;
+  }
+
+  app-risk-gauge {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 900px) {
+  .dashboard-shell {
+    padding: 14px;
+  }
+
+  .topbar {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .ops-strip {
+    justify-content: flex-start;
+  }
+
+  .status-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  app-floor-map,
+  app-ai-insights,
+  app-risk-gauge,
+  app-alerts-panel,
+  app-sensor-timeline {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 560px) {
+  .status-grid {
+    grid-template-columns: 1fr;
+  }
+}
